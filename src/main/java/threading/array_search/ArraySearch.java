@@ -6,6 +6,8 @@ public class ArraySearch implements Runnable {
     private int end;
     private int key;
     private int[] array;
+    public static int counter;
+    private static Object lock = new Object();
 
     public ArraySearch(int start, int end, int key, int[] array) {
         this.start = start;
@@ -19,6 +21,9 @@ public class ArraySearch implements Runnable {
                 for (int i = start; i <= end; i++) {
                     if (array[i] == key) {
                         System.out.println("Index:"+ i);
+                        synchronized (lock) {
+                            counter++;
+                        }
                     }
                 }
 

@@ -2,7 +2,8 @@ package threading.array_search;
 import java.util.Random;
 
 public class Test {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+
         final int[] array = new int[100];
         Random random = new Random();
         for (int i = 0; i < 100; i++) {
@@ -15,12 +16,15 @@ public class Test {
             System.out.print(array[j]+",");
         }
         System.out.println();
+        ArraySearch.counter = 0;
 
         for (int i = 0 ; i <10 ; i++){
 
             new Thread(new ArraySearch((10*i) , ((10*i)+9) ,key, array)).start();
 
         }
+        Thread.sleep(1000);
+        System.out.println("Counter:"+ ArraySearch.counter);
 
 
     }
